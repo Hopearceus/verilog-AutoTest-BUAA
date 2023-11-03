@@ -1,0 +1,15 @@
+Init
+Calc pick=add
+Calc reg=vt repeat=20
+
+Beq end=$s0 var=$s1
+    Beq end=$s2 var=$s3
+        Calc reg=v
+    Calc reg=t
+
+Procedure
+    Calc reg=v
+
+SwLw repeat=2
+
+Endless
