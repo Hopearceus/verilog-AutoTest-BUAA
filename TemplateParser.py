@@ -54,7 +54,6 @@ def parser(lines: [str]):
 
 
 def walk_tree(root: LayerTree):
-    print(root.instruction)
     if root.instruction == "":
         return "".join([walk_tree(child) for child in root.child])
     tokens = root.instruction.split()
