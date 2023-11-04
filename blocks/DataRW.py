@@ -4,6 +4,14 @@ from blocks.BlockBase import BlockBase
 class _DataReadWrite(BlockBase):
 
     def spawn(self, *args, **kwargs):
+        """
+        Through store and load blocks
+        :keyword AddrStart: The start address to s/l, 0 by default
+        :keyword AddrEnd: The end address to s/l, 12284 by default
+        :keyword AddrStep: The step between two address, 4 by default
+        :keyword SL: Store or load, "load" by default, the other option is "store"
+        :return: A multi-line block
+        """
         addr_s = int(kwargs.get("AddrStart", "0"))
         addr_e = int(kwargs.get("AddrEnd", "12284"))
         addr_step = int(kwargs.get("AddrStep", "4"))
