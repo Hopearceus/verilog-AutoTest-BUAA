@@ -9,28 +9,26 @@ class __Calculation(BlockBase):
         "sub #r, #r, #r",
         "lui #r, #i",
         "ori #r, #r, #i",
-        "sll #r, #r, #s"
+        # "sll #r, #r, #s"
     ]
 
     def spawn(self, *args, **kwargs):
         """
         Spawn a random instruction that is about calculation
-        :keyword pick: pick a specified instruction
+        :keyword pick: pick some specified instructions, splitted by `|`
         :keyword reg: choose the registers which are allowed to use
         :keyword repeat: repeat(random) `repeat` times, 1 by default
         :return: multi-line instructions(`repeat` lines)
         """
-        choice_dict = dict([(choice.split()[0], choice) for choice in self.choice])
+        pick_list = kwargs.get("pick", "|".join([choice.split()[0] for choice in self.choice])).split("|")
+        choice_list = [choice for choice in self.choice if choice.split()[0] in pick_list]
 
         try:
             repeat = int(kwargs.get("repeat", "1"))
         except ValueError as e:
             repeat = 1
 
-        if kwargs.get("pick") in choice_dict:
-            instr = "\n".join([choice_dict[kwargs.get("pick")]] * repeat)
-        else:
-            instr = "\n".join(random.choices(self.choice, k=repeat))
+        instr = "\n".join(random.choices(choice_list, k=repeat))
 
         reg = kwargs.get("reg", "vats")
 
