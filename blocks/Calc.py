@@ -9,7 +9,7 @@ class __Calculation(BlockBase):
         "sub #r, #r, #r",
         "lui #r, #i",
         "ori #r, #r, #i",
-        "sll #r, #r, #s"
+        # "sll #r, #r, #s"
     ]
 
     def spawn(self, *args, **kwargs):
