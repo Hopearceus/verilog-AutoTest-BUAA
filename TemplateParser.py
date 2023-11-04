@@ -72,5 +72,8 @@ def walk_tree(root: LayerTree):
 
 
 if __name__ == "__main__":
-    s = [s for s in pathlib.Path("templates/demo.template").open("r").readlines() if len(s.strip()) > 0]
-    print(parser(s))
+    template_file = pathlib.Path("templates/Extreme.DataMemoryThrough.template")
+    output_file = pathlib.Path("temporary/out.asm")
+
+    lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
+    output_file.write_text(parser(lines))

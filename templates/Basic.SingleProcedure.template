@@ -1,0 +1,8 @@
+Init
+
+Procedure
+    Beq var=$s0 end=$s1
+        Calc reg=vat0 repeat=10
+    Calc reg=vat repeat=100
+
+Calc reg=vat repeat=100
