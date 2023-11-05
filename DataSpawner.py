@@ -33,15 +33,14 @@ def gen_data(count, print_title=True):
         for i, name in enumerate(name_lst):
             if print_title:
                 print(f"///// {i + 1} / {count}: {name} /////")
-            yield (i, name), template_parser(templ_dct[name])
-
+            asm_path = temp_path / "test.asm"
+            asm_path.write_text(template_parser(templ_dct[name]))
+            yield
     return generator()
 
 
 if __name__ == "__main__":
     temp_path = pathlib.Path("temporary")
     temp_path.mkdir(exist_ok=True)
-    for (idx, file_name), asm in gen_data(11):
-        asm_path = temp_path / f"{file_name}-{idx}.asm"
-        asm_path.write_text(asm)
-        asm_path.unlink()
+    for _ in gen_data(11):
+        pass
