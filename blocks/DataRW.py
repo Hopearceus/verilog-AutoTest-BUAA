@@ -13,8 +13,8 @@ class _DataReadWrite(BlockBase):
         :return: A multi-line block
         """
         addr_s = int(kwargs.get("AddrStart", "0"))
-        addr_e = int(kwargs.get("AddrEnd", "12284"))
         addr_step = int(kwargs.get("AddrStep", "4"))
+        addr_e = int(kwargs.get("AddrEnd", "12284")) + addr_step
 
         sl = "l" if kwargs.get("SL", "load") == "load" else "s"
         width = "_bh_w"[addr_step]
