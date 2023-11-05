@@ -3,8 +3,17 @@ import difflib
 
 
 def diff(ans_str: str, out_str: str, print_info=True, stop_at=5):
-    ans_lines = [line for line in ans_str.splitlines() if line and line[0] == '@']
-    out_lines = [line for line in out_str.splitlines() if line and line[0] == '@']
+    def line_filter(line: str):
+        if len(line) == 0:
+            return False
+        if line[0] != '@':
+            return False
+        if (idx := line.find('$')) != -1 and line[idx: idx + 3] == "$ 0":
+            return False
+        return True
+
+    ans_lines = [line for line in ans_str.splitlines() if line_filter(line)]
+    out_lines = [line for line in out_str.splitlines() if line_filter(line)]
     if print_info:
         print(f"Answer: {len(ans_lines)} lines / Output: {len(out_lines)} lines")
     ans_line, out_line = 1, 1
