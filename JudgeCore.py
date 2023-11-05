@@ -3,8 +3,8 @@ import difflib
 
 
 def diff(ans_str: str, out_str: str, print_info=True, stop_at=5):
-    ans_lines = [line for line in ans_str.splitlines() if line[0] == '@' or line[0] == '@']
-    out_lines = [line for line in out_str.splitlines() if line[0] == '@' or line[0] == '@']
+    ans_lines = [line for line in ans_str.splitlines() if line and line[0] == '@']
+    out_lines = [line for line in out_str.splitlines() if line and line[0] == '@']
     if print_info:
         print(f"Answer: {len(ans_lines)} lines / Output: {len(out_lines)} lines")
     ans_line, out_line = 1, 1

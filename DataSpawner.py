@@ -29,6 +29,9 @@ def gen_data(count, print_title=True):
     name_lst = name_lst * cycle + random.choices(name_lst, k=rest)
     random.shuffle(name_lst)
 
+    temp_path = pathlib.Path("temporary")
+    temp_path.mkdir(exist_ok=True)
+
     def generator():
         for i, name in enumerate(name_lst):
             if print_title:
@@ -40,7 +43,8 @@ def gen_data(count, print_title=True):
 
 
 if __name__ == "__main__":
-    temp_path = pathlib.Path("temporary")
-    temp_path.mkdir(exist_ok=True)
-    for _ in gen_data(11):
-        pass
+    pass
+    # temp_path = pathlib.Path("temporary")
+    # temp_path.mkdir(exist_ok=True)
+    # for _ in gen_data(11):
+    #     pass
