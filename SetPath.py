@@ -27,7 +27,7 @@ def write_config():
         s = input("Error path! Try again:\n")
     pathlib.Path("config/ISE_path").write_text(s)
     s = input("please enter your Java path here:\n")
-    while os.system(s + " -version>nul") != 0:
+    while os.system(s + " -version") != 0:
         s = input("Error path! Try again:\n")
     pathlib.Path("config/Java_path").write_text(s)
     s = input("please enter your ise project path here:\n")
