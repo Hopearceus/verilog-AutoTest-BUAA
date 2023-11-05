@@ -18,7 +18,7 @@ def run():
               " -nodebug -prj ./run/mips.prj -o mips.exe mips_tb")
     os.system(java_path + " -jar ./Mars_CO_v0.4.1.jar mc CompactLargeText a dump .text HexText ./temporary/code.txt")
     os.system("move ./temporary/code.txt ./run/")
-    os.system("mips.exe -nolog -tclbatch ./run/mips.tcl > cpu.txt")
+    os.system("mips.exe -nolog -tclbatch ./run/mips.tcl > ./temporary/cpu.txt")
     s = input("Do you want to enable delay branch? [y/N]")
     if s.__contains__("y") or s.__contains__("Y"):
         os.system(java_path +
