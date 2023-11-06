@@ -22,7 +22,7 @@ class BlockBase:
 
     @staticmethod
     def imm16() -> str:
-        return BlockBase.imm(low=0, high=65536)
+        return BlockBase.imm(low=0, high=65535)
 
     @staticmethod
     def imm26() -> str:
