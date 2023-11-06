@@ -11,6 +11,9 @@ from DataSpawner import gen_data
 def hint_wrapper(s):
     return '\033[1m\033[34m' + s + '\033[0m'
 
+def prompt_wrapper(s):
+    return '\033[1m\033[36m' + s + '\033[0m'
+
 
 def run():
     path = sp.set_path()
@@ -30,7 +33,7 @@ def run():
         os.system((pathlib.Path(xilinx_path) / "bin" / "lin64" / "fuse").__str__() +
                   " -nodebug -prj ./run/mips.prj -o mips.exe mips_tb")
     print(hint_wrapper("Done!"))
-    s = input("Do you want to enable delay branch? [y/N]")
+    s = input(prompt_wrapper("Enable the delay branch? [y/N] "))
     no_db = s.lower().find("y") == -1
     for _ in gen_data(10):
         print(hint_wrapper("Run Mars to get the code text ..."))
