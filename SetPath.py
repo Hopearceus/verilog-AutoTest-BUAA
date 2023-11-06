@@ -26,7 +26,7 @@ def write_config():
 
     if not os.path.exists("./config"):
         os.mkdir("config")
-    s = input(hint_wrapper(f"Please enter your ISE path (end with ISE{os.path.sep}): "))
+    s = input(hint_wrapper(f"Please enter your ISE path (end with 'ISE{os.path.sep}'): "))
     while re.match(".*[/\\\\]ISE[/\\\\]?$", s) is None or not pathlib.Path(s).exists() or not pathlib.Path(s).is_dir():
         s = input(hint_wrapper("Error path! Try again: ", True))
     pathlib.Path("config/ISE_path").write_text(s)
@@ -41,7 +41,7 @@ def write_config():
             s = input(hint_wrapper("Error path! Try again: ", True))
 
     pathlib.Path("config/Java_path").write_text(s)
-    s = input(hint_wrapper("Please enter your ise project path: "))
+    s = input(hint_wrapper("Please enter your ISE project path: "))
     while not pathlib.Path(s).exists():
         s = input(hint_wrapper("No such folder! Try again: ", True))
     pathlib.Path("config/Prj_path").write_text(s)
