@@ -1,6 +1,7 @@
 import pathlib
 import re
 import os
+import subprocess
 
 
 class PathError(BaseException):
@@ -26,9 +27,16 @@ def write_config():
     while re.match(".*[/\\\\]ISE[/\\\\]?$", s) is None or not pathlib.Path(s).exists() or not pathlib.Path(s).is_dir():
         s = input("Error path! Try again:\n")
     pathlib.Path("config/ISE_path").write_text(s)
+
     s = input("please enter your Java path here:\n")
-    while os.system(s + " -version") != 0:
-        s = input("Error path! Try again:\n")
+    right = False
+    while not right:
+        try:
+            subprocess.check_call([s, "-version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            right = True
+        except (FileNotFoundError, subprocess.CalledProcessError) as _:
+            s = input("Error path! Try again:\n")
+
     pathlib.Path("config/Java_path").write_text(s)
     s = input("please enter your ise project path here:\n")
     while not pathlib.Path(s).exists():
