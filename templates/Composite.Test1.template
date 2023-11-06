@@ -1,13 +1,15 @@
+Nop
 Init
 Calc pick=add
 Calc reg=vt repeat=20
 
-
-
 Procedure
+Nop
     Calc reg=v
     Beq end=$s0 var=$s1
+        Nop
         Calc reg=t
+    Nop
 
 SwLw repeat=2
 
