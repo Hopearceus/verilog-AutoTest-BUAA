@@ -23,24 +23,24 @@ def set_path():
 def write_config():
     if not os.path.exists("./config"):
         os.mkdir("config")
-    s = input("please enter your ISE path here, ending with ISE/(\\):\n")
+    s = input(f"Please enter your ISE path (end with ISE{os.path.sep}): ")
     while re.match(".*[/\\\\]ISE[/\\\\]?$", s) is None or not pathlib.Path(s).exists() or not pathlib.Path(s).is_dir():
-        s = input("Error path! Try again:\n")
+        s = input("Error path! Try again: ")
     pathlib.Path("config/ISE_path").write_text(s)
 
-    s = input("please enter your Java path here:\n")
+    s = input("Please enter your Java path: ")
     right = False
     while not right:
         try:
             subprocess.check_call([s, "-version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             right = True
         except (FileNotFoundError, subprocess.CalledProcessError) as _:
-            s = input("Error path! Try again:\n")
+            s = input("Error path! Try again: ")
 
     pathlib.Path("config/Java_path").write_text(s)
-    s = input("please enter your ise project path here:\n")
+    s = input("Please enter your ise project path: ")
     while not pathlib.Path(s).exists():
-        s = input("No such file! Try again:\n")
+        s = input("No such folder! Try again: ")
     pathlib.Path("config/Prj_path").write_text(s)
 
 
