@@ -61,7 +61,7 @@ def run():
 
     for _ in gen_data(10):
         print(hint_wrapper("Run Mars to get the code text ..."))
-        os.system(java_path + " -jar ./Mars_CO_v0.4.1.jar nc mc CompactLargeText a dump .text HexText ./temporary/code.txt ./temporary/test.asm")
+        os.system(java_path + " -jar ./Mars_CO_headless.jar nc mc CompactLargeText a dump .text HexText ./temporary/code.txt ./temporary/test.asm")
         # os.system(r"move .\temporary\code.txt .\code.txt")
         shutil.move("./temporary/code.txt", "./run/code.txt")
 
@@ -73,10 +73,10 @@ def run():
         print(hint_wrapper("Run Mars to get the right output ..."))
         if no_db:
             os.system(java_path +
-                      " -jar Mars_CO_v0.4.1.jar ig 1000000 mc CompactLargeText nc ./temporary/test.asm coL1 > ./temporary/ans.txt")
+                      " -jar Mars_CO_headless.jar ig 1000000 mc CompactLargeText nc ./temporary/test.asm coL1 > ./temporary/ans.txt")
         else:
             os.system(java_path +
-                      " -jar Mars_CO_v0.4.1.jar ig 1000000 db mc CompactLargeText nc ./temporary/test.asm coL1 > ./temporary/ans.txt")
+                      " -jar Mars_CO_headless.jar ig 1000000 db mc CompactLargeText nc ./temporary/test.asm coL1 > ./temporary/ans.txt")
 
         print(hint_wrapper("Compare the outputs ..."))
         if not diff(pathlib.Path("./temporary/ans.txt").read_text(),
