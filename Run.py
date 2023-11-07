@@ -19,6 +19,10 @@ def prompt_wrapper(s):
     return '\033[1m\033[36m' + s + '\033[0m'
 
 
+def fatal_wrapper(s):
+    return '\033[1m\033[31m' + s + '\033[0m'
+
+
 def run():
     path = sp.set_path()
     xilinx_path = path['xilinx_path']
@@ -37,8 +41,11 @@ def run():
     os.chdir(current_path / "run")
     ret = os.system(f"{fuse_path} -nodebug -prj mips.prj -o mips.exe mips_tb")
     os.chdir(current_path)
-    print(ret)
-    print(hint_wrapper("Done!"))
+    if ret == 0:
+        print(hint_wrapper("Done!"))
+    else:
+        print(fatal_wrapper("Compile Error!"))
+        return
 
     s = input(prompt_wrapper("Enable the delay branch? [y/N] "))
     no_db = s.lower().find("y") == -1
