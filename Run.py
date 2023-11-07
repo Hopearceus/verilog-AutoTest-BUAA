@@ -3,10 +3,10 @@ import pathlib
 import platform
 import shutil
 
-import SetPath as sp
+from SetPath import set_path
 from JudgeCore import diff
 from DataSpawner import gen_data
-
+from VerilogFileSystem import verilog_source_finder, copy_verilog_source, gen_prj_file
 
 current_path = pathlib.Path(__file__).resolve().parent
 
@@ -24,16 +24,23 @@ def fatal_wrapper(s):
 
 
 def run():
-    path = sp.set_path()
+    path = set_path()
     xilinx_path = path['xilinx_path']
     java_path = path['java_path']
+    prj_path = path['prj_path']
 
-    # prj_path = path['prj_path']
     # cwd_path = os.getcwd()
     # for file in pathlib.Path(prj_path).rglob("*\\*.v"):
     #     print("copy " + str(file) + " " + cwd_path + "\\run\\" + file.name)
     #     os.system("copy " + str(file) + " " + cwd_path + "\\run\\" + file.name)
     # os.system("copy " + prj_path + "\\mips.prj " + cwd_path + "run\\mips.prj")
+
+    print(hint_wrapper("Copying the verilog source files ..."))
+    v_files = verilog_source_finder(pathlib.Path(prj_path))
+    copy_verilog_source(pathlib.Path("./run"), v_files)
+
+    print(hint_wrapper("Rewrite the prj file ..."))
+    pathlib.Path("./run/mips.prj").write_text(gen_prj_file(v_files))
 
     print(hint_wrapper("Compiling the verilog projects ..."))
     bin_folder = "nt64" if platform.system() == "Windows" else "lin64"
