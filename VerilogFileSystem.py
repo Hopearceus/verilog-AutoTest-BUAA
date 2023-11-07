@@ -22,6 +22,30 @@ def gen_prj_file(files: [pathlib.Path, pathlib.Path]):
     return "\n".join(ret)
 
 
+def gen_tb_file():
+    return """\
+`timescale 1ns / 1ps
+module mips_tb;
+    reg clk;
+    reg reset;
+    mips uut (
+        .clk(clk), 
+        .reset(reset)
+    );
+    initial begin
+        clk = 0;
+        reset = 1;
+        #2 reset = 0;
+    end
+    always #1 clk = ~clk;
+endmodule
+"""
+
+
+def gen_tcl_file(run_us=2000):
+    return f"run {run_us}us;\nexit"
+
+
 if __name__ == "__main__":
     f = verilog_source_finder(pathlib.Path("/home/swkfk/ise_proj/SingleCycleMipsCPU"))
     copy_verilog_source(pathlib.Path("./run"), f)

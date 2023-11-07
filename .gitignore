@@ -2,15 +2,4 @@
 __pycache__/
 temporary/
 config/
-run/*.v
-run/mips.prj
-isim/
-fuse.log
-fuse.xmsgs
-fuseRelaunch.cmd
-run/**/*.v
-mips.exe
-code.txt
-isim.wdb
-run/cpu.txt
-run/mips.exe
+run/

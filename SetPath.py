@@ -9,6 +9,10 @@ class PathError(BaseException):
         super().__init__(s)
 
 
+def ensure_path(folder):
+    pathlib.Path(folder).mkdir(exist_ok=True)
+
+
 def set_path():
     if not pathlib.Path("./config").exists() or not pathlib.Path("./config/ISE_path").exists()\
             or not pathlib.Path("./config/Java_path").exists() or not pathlib.Path("./config/Prj_path").exists():

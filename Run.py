@@ -3,10 +3,10 @@ import pathlib
 import platform
 import shutil
 
-from SetPath import set_path
+from SetPath import set_path, ensure_path
 from JudgeCore import diff
 from DataSpawner import gen_data
-from VerilogFileSystem import verilog_source_finder, copy_verilog_source, gen_prj_file
+from VerilogFileSystem import verilog_source_finder, copy_verilog_source, gen_prj_file, gen_tcl_file, gen_tb_file
 
 current_path = pathlib.Path(__file__).resolve().parent
 
@@ -39,8 +39,10 @@ def run():
     v_files = verilog_source_finder(pathlib.Path(prj_path))
     copy_verilog_source(pathlib.Path("./run"), v_files)
 
-    print(hint_wrapper("Rewrite the prj file ..."))
+    print(hint_wrapper("Rewrite the project config file ..."))
     pathlib.Path("./run/mips.prj").write_text(gen_prj_file(v_files))
+    pathlib.Path("./run/mips.tcl").write_text(gen_tcl_file())
+    pathlib.Path("./run/mips_tb.v").write_text(gen_tb_file())
 
     print(hint_wrapper("Compiling the verilog projects ..."))
     bin_folder = "nt64" if platform.system() == "Windows" else "lin64"
@@ -85,4 +87,6 @@ def run():
 
 if __name__ == "__main__":
     os.chdir(current_path)
+    ensure_path("temporary")
+    ensure_path("run")
     run()
