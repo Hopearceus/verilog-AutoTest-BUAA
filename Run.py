@@ -67,7 +67,7 @@ def run():
 
         print(hint_wrapper("Start the simulation ..."))
         os.chdir(current_path / "run")
-        os.system("./mips.exe -nolog -tclbatch ./mips.tcl > ../temporary/cpu.txt")
+        os.system(".{0}mips.exe -nolog -tclbatch .{0}mips.tcl > ..{0}temporary{0}cpu.txt".format(os.path.sep))
         os.chdir(current_path)
 
         print(hint_wrapper("Run Mars to get the right output ..."))
