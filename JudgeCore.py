@@ -8,7 +8,8 @@ def diff(ans_str: str, out_str: str, print_info=True, stop_at=5):
             return False
         if line[0] != '@':
             return False
-        if (idx := line.find('$')) != -1 and line[idx: idx + 3] == "$ 0":
+        idx = line.find('$')
+        if idx != -1 and line[idx: idx + 3] == "$ 0":
             return False
         return True
 
