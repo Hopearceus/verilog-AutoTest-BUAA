@@ -33,6 +33,7 @@ lui $at, 0x{addr_reg[0:4]}
 ori $at, $at, 0x{addr_reg[4:8]}
 {start_label}:
 beq $t0, $t1, {end_label}
+nop
 
 {sl}{width} $v0, {addr_imm}($at)
 add $v0, $v0, $v1
@@ -40,6 +41,7 @@ add $v0, $v0, $v1
 add $t0, $t0, $t2
 add $at, $at, $t2
 beq $0, $0, {start_label}
+nop
 {end_label}:
 """
 

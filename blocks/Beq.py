@@ -31,12 +31,14 @@ ori {loop_end_r}, $zero, {loop_end}
 {loop_label}:
 
 beq {loop_var_r}, {loop_end_r}, {end_label}
+nop
 
 {insert}
 
 ori $at, $zero, 1
 {loop_inc} {loop_var_r}, {loop_var_r}, $at
 beq $0, $0, {loop_label}
+nop
 {end_label}:
 """
 

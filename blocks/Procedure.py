@@ -19,14 +19,17 @@ class _ProcedureNormal(BlockBase):
 
         return f"""\
 beq $0, $0, {end_label}
+nop
 {procedure_label}:
 
 {insert}
 
 jr $ra
+nop
 
 {end_label}:
 jal {procedure_label}
+nop
 """
 
 
