@@ -1,10 +1,6 @@
-from blocks import Blocks
+import sys
+
+from Run import run
 
 if __name__ == "__main__":
-    print(Blocks["Init"].spawn())
-    print(Blocks["Calc"].spawn(pick="add"))
-    print(Blocks["Calc"].spawn(reg="vt", repeat="20"))
-    print(Blocks["Beq"].spawn(Blocks["Calc"].spawn(reg="v")))
-    print(Blocks["Procedure"].spawn(Blocks["Calc"].spawn(reg="v")))
-    print(Blocks["Endless"].spawn())
-    print(Blocks["SwLw"].spawn(repeat="2"))
+    run(template_used=sys.argv[1:] if len(sys.argv) > 1 else None)
