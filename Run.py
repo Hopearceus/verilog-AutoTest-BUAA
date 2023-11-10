@@ -60,7 +60,8 @@ def run(*args, **kwargs):
     no_db = s.lower().find("y") == -1
 
     template_used = kwargs.get("template_used", None)
-    for _ in gen_data(10, template_used=template_used):
+    test_counter = int(kwargs.get("count", "0"))
+    for _ in gen_data(test_counter, template_used=template_used):
         print(hint_wrapper("Run Mars to get the code text ..."))
         os.system(java_path + " -jar ./Mars_CO_headless.jar nc mc CompactLargeText a dump .text HexText ./temporary/code.txt ./temporary/test.asm")
         # os.system(r"move .\temporary\code.txt .\code.txt")
@@ -90,4 +91,4 @@ if __name__ == "__main__":
     os.chdir(current_path)
     ensure_path("temporary")
     ensure_path("run")
-    run()
+    run(count=10)
