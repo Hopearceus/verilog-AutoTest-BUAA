@@ -1,3 +1,4 @@
+import pathlib
 import sys
 
 from Run import run
@@ -14,4 +15,5 @@ if __name__ == "__main__":
     if not template_list:
         template_list = None
 
-    run(count=count, template_used=template_list)
+    endless = pathlib.Path("config/ENDLESS_AT_TAIL").is_file()
+    run(count=count, template_used=template_list, endless=endless)

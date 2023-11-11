@@ -23,9 +23,10 @@ def list_template(template_used):
     return template_dct, name_list
 
 
-def gen_data(count, print_title=True, template_used=None):
+def gen_data(count, print_title=True, template_used=None, endless=False):
     """
     生成供测评的 ASM 语句，返回一个生成器
+    :param endless: 是否在结尾主动插入死循环，默认为 False
     :param template_used: 允许使用的模板文件列表，None 表示无限制
     :param count: 数据组数
     :param print_title: 是否打印标题信息（默认为 True）
@@ -44,7 +45,8 @@ def gen_data(count, print_title=True, template_used=None):
             if print_title:
                 print(f"///// {i + 1} / {count}: {name} /////")
             asm_path = temp_path / "test.asm"
-            asm_path.write_text(template_parser(templ_dct[name]))
+            tail = ["Endless"] if endless else []
+            asm_path.write_text(template_parser(templ_dct[name] + tail))
             yield
     return generator()
 
