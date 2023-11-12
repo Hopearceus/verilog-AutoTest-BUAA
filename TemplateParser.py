@@ -57,7 +57,11 @@ def walk_tree(root: LayerTree):
     if root.instruction == "":
         return "".join([walk_tree(child) for child in root.child])
     tokens = root.instruction.split()
-    if not tokens or tokens[0] not in Blocks:
+    if not tokens:
+        raise Exception("Template syntax error @ " + root.instruction)
+    if tokens[0] == "REM":
+        return ""
+    if tokens[0] not in Blocks:
         raise Exception("Template syntax error @ " + root.instruction)
     kwargs = {}
     insert = ""
