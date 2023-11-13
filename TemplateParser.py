@@ -76,8 +76,11 @@ def walk_tree(root: LayerTree):
 
 
 if __name__ == "__main__":
-    template_file = pathlib.Path("templates/Extreme.DataMemoryThrough.template")
-    output_file = pathlib.Path("temporary/out.asm")
-
-    lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
-    output_file.write_text(parser(lines))
+    # template_file = pathlib.Path("templates/Extreme.DataMemoryThrough.template")
+    # output_file = pathlib.Path("temporary/out.asm")
+    #
+    # lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
+    # output_file.write_text(parser(lines))
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE1/code.asm").open("w").write(Blocks["CoverP5"].spawn())
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE2/code.asm").open("w").write(Blocks["CoverP5"].spawn())
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE3/code.asm").open("w").write(Blocks["CoverP5"].spawn())
