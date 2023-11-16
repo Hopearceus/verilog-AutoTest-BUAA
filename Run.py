@@ -85,8 +85,13 @@ def run():
         print(hint_wrapper("Right!\n"))
 
 
+def clear():
+    pathlib.Path("./").unlink();
+
+
 if __name__ == "__main__":
     os.chdir(current_path)
     ensure_path("temporary")
     ensure_path("run")
     run()
+    clear()
