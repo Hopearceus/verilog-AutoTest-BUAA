@@ -57,7 +57,11 @@ def walk_tree(root: LayerTree):
     if root.instruction == "":
         return "".join([walk_tree(child) for child in root.child])
     tokens = root.instruction.split()
-    if not tokens or tokens[0] not in Blocks:
+    if not tokens:
+        raise Exception("Template syntax error @ " + root.instruction)
+    if tokens[0] == "REM":
+        return ""
+    if tokens[0] not in Blocks:
         raise Exception("Template syntax error @ " + root.instruction)
     kwargs = {}
     insert = ""
@@ -72,8 +76,11 @@ def walk_tree(root: LayerTree):
 
 
 if __name__ == "__main__":
-    template_file = pathlib.Path("templates/Extreme.DataMemoryThrough.template")
-    output_file = pathlib.Path("temporary/out.asm")
-
-    lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
-    output_file.write_text(parser(lines))
+    # template_file = pathlib.Path("templates/Extreme.DataMemoryThrough.template")
+    # output_file = pathlib.Path("temporary/out.asm")
+    #
+    # lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
+    # output_file.write_text(parser(lines))
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE1/code.asm").open("w").write(Blocks["CoverP5"].spawn())
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE2/code.asm").open("w").write(Blocks["CoverP5"].spawn())
+    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE3/code.asm").open("w").write(Blocks["CoverP5"].spawn())

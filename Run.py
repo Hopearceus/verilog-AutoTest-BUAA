@@ -23,7 +23,7 @@ def fatal_wrapper(s):
     return '\033[1m\033[31m' + s + '\033[0m'
 
 
-def run():
+def run(*args, **kwargs):
     path = set_path()
     xilinx_path = path['xilinx_path']
     java_path = path['java_path']
@@ -59,7 +59,10 @@ def run():
     s = input(prompt_wrapper("Enable the delay branch? [y/N] "))
     no_db = s.lower().find("y") == -1
 
-    for _ in gen_data(10):
+    template_used = kwargs.get("template_used", None)
+    test_counter = int(kwargs.get("count", "0"))
+    endless = kwargs.get("endless", False)
+    for _ in gen_data(test_counter, template_used=template_used, endless=endless):
         print(hint_wrapper("Run Mars to get the code text ..."))
         os.system(java_path + " -jar ./Mars_CO_headless.jar nc mc CompactLargeText a dump .text HexText ./temporary/code.txt ./temporary/test.asm")
         # os.system(r"move .\temporary\code.txt .\code.txt")
@@ -93,5 +96,4 @@ if __name__ == "__main__":
     os.chdir(current_path)
     ensure_path("temporary")
     ensure_path("run")
-    run()
-    clear()
+    run(count=10)

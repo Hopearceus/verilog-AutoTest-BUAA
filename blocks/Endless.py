@@ -14,6 +14,7 @@ class _EndlessBeq(BlockBase):
         return f"""\
 {end_label}:
 beq $0, $0, {end_label}
+nop
 """
 
 

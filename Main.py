@@ -1,10 +1,19 @@
-from blocks import Blocks
+import pathlib
+import sys
+
+from Run import run
 
 if __name__ == "__main__":
-    print(Blocks["Init"].spawn())
-    print(Blocks["Calc"].spawn(pick="add"))
-    print(Blocks["Calc"].spawn(reg="vt", repeat="20"))
-    print(Blocks["Beq"].spawn(Blocks["Calc"].spawn(reg="v")))
-    print(Blocks["Procedure"].spawn(Blocks["Calc"].spawn(reg="v")))
-    print(Blocks["Endless"].spawn())
-    print(Blocks["SwLw"].spawn(repeat="2"))
+    template_list, count = None, 10
+    if len(sys.argv) > 1:
+        template_list = []
+        for arg in sys.argv[1:]:
+            if arg.startswith("count="):
+                count = int(arg.removeprefix("count="))
+            else:
+                template_list.append(arg)
+    if not template_list:
+        template_list = None
+
+    endless = pathlib.Path("config/ENDLESS_AT_TAIL").is_file()
+    run(count=count, template_used=template_list, endless=endless)
