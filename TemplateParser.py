@@ -81,6 +81,7 @@ if __name__ == "__main__":
     #
     # lines = [s for s in template_file.read_text().split('\n') if len(s.strip()) > 0]
     # output_file.write_text(parser(lines))
-    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE1/code.asm").open("w").write(Blocks["CoverP5"].spawn())
-    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE2/code.asm").open("w").write(Blocks["CoverP5"].spawn())
-    pathlib.Path("/home/swkfk/Mips/AutoTest/P5_FWD_CASE3/code.asm").open("w").write(Blocks["CoverP5"].spawn())
+    for i in range(50):
+        path = f"/home/swkfk/Mips/AutoTest/P6_FWD_CASE{i + 1}"
+        pathlib.Path(path).mkdir(exist_ok=True)
+        pathlib.Path(f"{path}/code.asm").open("w").write(Blocks["CoverP6"].spawn())

@@ -17,6 +17,14 @@ class BlockBase:
         return str(random.randint(low, high))
 
     @staticmethod
+    def imm_4(*, low, high) -> str:
+        return str(random.randint(low // 4, high // 4) * 4)
+
+    @staticmethod
+    def imm_4_1(*, low, high) -> str:
+        return str(random.randint(low // 4, high // 4) * 4 + 1024)
+
+    @staticmethod
     def shamt() -> str:
         return BlockBase.imm(low=0, high=31)
 

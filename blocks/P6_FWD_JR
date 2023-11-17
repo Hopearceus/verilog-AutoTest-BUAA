@@ -1,0 +1,187 @@
+addi $s1, $0, 4
+addi $s2, $0, -4
+addi $s3, $0, 8
+addi $s4, $0, -8
+addi $a0, $0, -12
+addi $s5, $0, 12
+addi $s6, $0, 16
+addi $a1, $0, 20
+lui  $s7, 0xffff
+ori  $s7, $s5, 0xffff
+
+jal label1
+add $1, $ra, $s1
+label1:
+jr $1
+nop
+
+jal label2
+addi $1, $ra, 4
+label2:
+jr $1
+nop
+
+jal label3
+sub $1, $ra, $s2
+label3:
+jr $1
+nop
+
+jal label4
+add $ra, $ra, $s3
+label4:
+and $1, $ra, $s7
+jr $1
+nop
+
+jal label5
+add $ra, $ra, $s3
+label5:
+andi $1, $ra, 0xffff
+jr $1
+nop
+
+jal label6
+add $ra, $ra, $s3
+label6:
+or $1, $ra, $0
+jr $1
+nop
+
+jal label7
+add $ra, $ra, $s3
+label7:
+ori $1, $ra, 0
+jr $1
+nop
+
+jal label11
+add $1, $ra, $s5
+label11:
+nop
+nop
+jr $1
+nop
+
+jal label12
+addi $1, $ra, 12
+label12:
+nop
+nop
+jr $1
+nop
+
+jal label13
+sub $1, $ra, $a0
+label13:
+nop
+nop
+jr $1
+nop
+
+jal label14
+add $ra, $ra, $s6
+label14:
+and $1, $ra, $s7
+nop
+nop
+jr $1
+nop
+
+jal label15
+add $ra, $ra, $s6
+label15:
+andi $1, $ra, 0xffff
+nop
+nop
+jr $1
+nop
+
+jal label16
+add $ra, $ra, $s6
+label16:
+or $1, $ra, $0
+nop
+nop
+jr $1
+nop
+
+jal label17
+add $ra, $ra, $s6
+label17:
+ori $1, $ra, 0
+nop
+nop
+jr $1
+nop
+
+jal label21
+add $ra, $ra, $s5
+label21:
+mthi $ra
+mfhi $1
+jr $1
+nop
+
+jal label22
+add $ra, $ra, $s5
+label22:
+mtlo $ra
+mflo $1
+jr $1
+nop
+
+jal label23
+add $ra, $ra, $a1
+label23:
+mthi $ra
+mfhi $1
+nop
+nop
+jr $1
+nop
+
+jal label24
+add $ra, $ra, $a1
+label24:
+mtlo $ra
+mflo $1
+nop
+nop
+jr $1
+nop
+
+jal label31
+add $ra, $ra, $s5
+label31:
+sw $ra, 0($0)
+lw $1,  0($0)
+jr $1
+nop
+
+jal label32
+add $ra, $ra, $s5
+label32:
+sh $ra, 2($0)
+lh $1,  2($0)
+jr $1
+nop
+
+jal label41
+NOP
+beq $0, $0, label42
+nop
+label41:
+jr $ra
+nop
+label42:
+
+jal label43
+NOP
+beq $0, $0, label44
+nop
+label43:
+NOP
+jr $ra
+nop
+label44:
