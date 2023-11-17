@@ -89,7 +89,13 @@ def run(*args, **kwargs):
 
 
 def clear():
-    pathlib.Path("./").unlink();
+    path = os.getcwd()
+    runPath = (pathlib.Path(path) / 'run')
+    for file in runPath.glob("*"):
+        if file.is_file():
+            file.unlink()
+        else:
+            shutil.rmtree(file)
 
 
 if __name__ == "__main__":
@@ -97,3 +103,4 @@ if __name__ == "__main__":
     ensure_path("temporary")
     ensure_path("run")
     run(count=10)
+    clear()
