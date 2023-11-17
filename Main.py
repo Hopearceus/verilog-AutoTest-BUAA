@@ -16,4 +16,5 @@ if __name__ == "__main__":
         template_list = None
 
     endless = pathlib.Path("config/ENDLESS_AT_TAIL").is_file()
-    run(count=count, template_used=template_list, endless=endless)
+    UseTbP6 = pathlib.Path("config/USE_TB_P6").is_file()
+    run(count=count, template_used=template_list, endless=endless, use_tb_p6=UseTbP6)

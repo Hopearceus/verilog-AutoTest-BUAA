@@ -42,7 +42,7 @@ def run(*args, **kwargs):
     print(hint_wrapper("Rewrite the project config file ..."))
     pathlib.Path("./run/mips.prj").write_text(gen_prj_file(v_files))
     pathlib.Path("./run/mips.tcl").write_text(gen_tcl_file())
-    pathlib.Path("./run/mips_tb.v").write_text(gen_tb_file())
+    pathlib.Path("./run/mips_tb.v").write_text(gen_tb_file(kwargs.get("use_tb_p6", False)))
 
     print(hint_wrapper("Compiling the verilog projects ..."))
     bin_folder = "nt64" if platform.system() == "Windows" else "lin64"
