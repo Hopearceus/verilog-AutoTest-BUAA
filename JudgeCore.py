@@ -19,8 +19,18 @@ def diff(ans_str: str, out_str: str, print_info=True, stop_at=5):
             return line[idx:]
         return ""
 
+    def sort_key_time(line: str):
+        idx1, idx2 = line.find('@'), line.find(':')
+        pc = int(line[idx1 + 1:idx2], 16)
+        if idx1 == 0:
+            return pc
+        else:
+            return pc + int(line[:idx1]) * 0x00010000
+
     ans_lines = [line for line in ans_str.splitlines() if line_filter(line)]
-    out_lines = [remove_time_stamp(line) for line in out_str.splitlines() if line_filter(line)]
+    out_lines = [line for line in out_str.splitlines() if line_filter(line)]
+    out_lines.sort(key=sort_key_time)
+    out_lines = list(map(remove_time_stamp, out_lines))
     if print_info:
         print(f"Answer: {len(ans_lines)} lines / Output: {len(out_lines)} lines")
     ans_line, out_line = 1, 1
