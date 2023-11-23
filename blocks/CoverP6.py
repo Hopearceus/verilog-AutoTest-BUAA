@@ -321,7 +321,7 @@ class __CoverP6(BlockBase):
 
         instructions.extend(self.to_jr())
 
-        return "\n".join(instructions)
+        return "\n".join(instructions) + "\n"
 
 
 def instance():
